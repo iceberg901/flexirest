@@ -14,7 +14,7 @@ module Flexirest
     def initialize(method, object, params = {})
       @method                     = method
       @method[:options]           ||= {}
-      @method[:options][:lazy]    ||= []
+      @method[:options][:lazy]    ||= {}
       @method[:options][:array]   ||= []
       @method[:options][:has_one] ||= {}
       @overridden_name            = @method[:options][:overridden_name]

@@ -6,6 +6,9 @@ module Flexirest
 
     def initialize(name, value, request, options = {})
       @name = name
+      if @method && @method[:options] && @method[:options][:lazy] && !@method[:options][:lazy].is_a?(Hash)
+        Flexirest::Logger.warn("Lazy loading without specifying an object class is deprecated, please explicitly specify the object class of the association like this: `lazy: { association: AssociatedClass }`")
+      end
       class_to_map = request.method[:options][:lazy][name] rescue nil
       @request = class_to_map.nil? ? request : Flexirest::Request.new(class_to_map._mapped_method(:find), class_to_map.new, options)
       @object = nil
